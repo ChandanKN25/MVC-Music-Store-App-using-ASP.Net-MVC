@@ -1,0 +1,61 @@
+﻿@model List<WebAPI.Album>
+    
+        <td> @{Html.RenderAction("GenreMenu", "Store");}</td>
+        <td>
+
+            <div class="jumbotron">
+                <h3><marquee width="60%" direction="down" height="100px" style="font-size:60px">iLead MVC music store</marquee></h3>
+                <img src="~/Content/Images/logo.png" />
+                @*<h1>iLead Music Store</h1>*@
+                <p class="lead">
+                    This music store has three main parts: shopping, checkout, and administration
+                </p>
+                <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+            </div>
+            <div style="text-align:center; width : 100%; ">
+                <marquee><img src="~/Content/Images/home-showcase.png" style="text-align:center" /></marquee>
+            </div>
+            <div class="row" style="text-align:center; width: 100%;">
+
+                <div class="col-md-4">
+                    <h2>Store</h2>
+                    <p></p>
+                    <p><a class="btn btn-default" href="~/Store">Click here &raquo;</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>StoreManager</h2>
+                    <p></p>
+                    <p><a class="btn btn-default" href="~/StoreManager">Click here &raquo;</a></p>
+                </div>
+                @*<div class="col-md-4">
+                <h2>Web Hosting</h2>
+                <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+            </div>*@
+            </div>
+
+
+
+            @*<div id="promotion">
+        </div>*@
+            <h3><em>Fresh</em> off the grill</h3>
+            <ul id="album-list">
+                @foreach (var album in Model)
+                {
+                    <li>
+
+                        <img alt="@album.Title" src="@album.AlbumArtUrl" />
+                        @Html.ActionLink(album.Title, "../Store/Details", new { album.AlbumId })
+                        @*<a href="@Url.Action("Details", "Store",
+                    new { id = album.AlbumId })">
+                                   <img alt="@album.Title" src="@album.AlbumArtUrl" />
+                                   <span>@album.Title</span>
+                               </a>*@
+                    </li>
+                }
+
+
+            </ul>
+        </td>
+  
+

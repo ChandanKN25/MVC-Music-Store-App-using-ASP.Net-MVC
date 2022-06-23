@@ -1,0 +1,75 @@
+﻿@model WebAPI.Models.GenreModel
+
+@{
+    ViewBag.Title = "Genre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Genre</h2>
+
+<div>
+    <h4>Browsing Genre: @Model.Name</h4>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+    @*<dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Albums")
+        </dt>
+
+        <dd>
+            <ul>
+                @foreach (var album in Model.Albums)
+                {
+                    <li>
+                        @Html.ActionLink(album.Title, "Details", new { album.AlbumId })
+                    </li>
+                }
+
+
+            </ul>
+
+        </dd>
+
+    </dl>*@
+    <div class="genre">
+        <h3><em>@Model.Name</em> Albums</h3>
+        <ul id="album-list">
+            @foreach (var album in Model.Albums)
+            {
+            <li>
+                <img alt="@album.Title" src="@album.AlbumArtUrl" />
+                @Html.ActionLink(album.Title, "../Store/Details", new { album.AlbumId })
+                @*<a href="@Url.Action("Details", new { id = album.AlbumId })">
+            <img alt="@album.Title" src="@album.AlbumArtUrl" />
+            <span>@album.Title</span>
+        </a>*@
+            </li>
+            }
+        </ul>
+    </div>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5613749944a84a6d844b81ef8a0877fb" Name="Diagram1">
+        <EntityTypeShape EntityType="iLead2021Model.TestUserTable" Width="1.5" PointX="0.625" PointY="0.625" IsExpanded="true" />
+        <AssociationConnector Association="iLead2021Model.FK_TestUserTable_TestUserTable" ManuallyRouted="true" >
+          <ConnectorPoint PointX="1.1569230769230767" PointY="2.797587890625" />
+          <ConnectorPoint PointX="1.1569230769230767" PointY="3.047587890625" />
+          <ConnectorPoint PointX="1.9159615384615383" PointY="3.047587890625" />
+          <ConnectorPoint PointX="1.9159615384615383" PointY="2.880087890625" />
+          <ConnectorPoint PointX="1.6034615384615383" PointY="2.880087890625" />
+          <ConnectorPoint PointX="1.6034615384615383" PointY="2.797587890625" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="iLead2021Model.Employee" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="iLead2021Model.Album" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="iLead2021Model.Artist" Width="1.5" PointX="0.75" PointY="8.875" />
+        <EntityTypeShape EntityType="iLead2021Model.Cart" Width="1.5" PointX="5.25" PointY="8.75" />
+        <EntityTypeShape EntityType="iLead2021Model.Genre" Width="1.5" PointX="0.75" PointY="5.875" />
+        <EntityTypeShape EntityType="iLead2021Model.Order" Width="1.5" PointX="3" PointY="9.875" />
+        <EntityTypeShape EntityType="iLead2021Model.OrderDetail" Width="1.5" PointX="5.25" PointY="5.5" />
+        <AssociationConnector Association="iLead2021Model.FK__Album__ArtistId__276EDEB3" />
+        <AssociationConnector Association="iLead2021Model.FK_Album_Genre" />
+        <AssociationConnector Association="iLead2021Model.FK_Cart_Album" />
+        <AssociationConnector Association="iLead2021Model.FK_InvoiceLine_Album" />
+        <AssociationConnector Association="iLead2021Model.FK__InvoiceLi__Invoi__2F10007B" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

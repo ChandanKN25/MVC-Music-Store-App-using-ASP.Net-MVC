@@ -1,0 +1,42 @@
+﻿@*@{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Index</h2>*@
+@model IEnumerable<WebAPI.Models.GenreModel>
+
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Welcome to iLead Music Store</h2>
+
+<p>
+    @Html.ActionLink("Manage Store", "Index", "StoreManager") |
+
+    @Html.ActionLink("Back to Home", "Index", "Home")  |
+
+    @Html.ActionLink("View Shopping Cart", "Index", "ShoppingCart") |
+
+    @{Html.RenderAction("CartSummary", "ShoppingCart");} 
+
+   
+</p>
+@*<div class="navbar-collapse collapse">
+    <p><a class="btn btn-default" href="~/Store/Details/1234">Details &raquo;</a></p>
+    <p><a class="btn btn-default" href="~/Store/Browse?Genre=Rock">Browse &raquo;</a></p>
+    </div>*@
+<h3>Browse Genres</h3>
+
+
+<p> Select from @Model.Count() genres:</p>
+<ul>
+    @foreach (var genre in Model)
+    {@*var link = "Store/Browse?Genre=" + @genre.Name;
+            <li><a class="btn btn-default" href=@link>@genre.Name &raquo;</a></li>*@ @*<li><a href="~/Store/Browse?genre=@genre.Name">@genre.Name</a></li>*@
+            <li>@Html.ActionLink(genre.Name, "Browse", new { genre = genre.Name })</li>
+}
+</ul>
+

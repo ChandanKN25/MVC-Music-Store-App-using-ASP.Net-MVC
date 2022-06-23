@@ -1,0 +1,75 @@
+﻿@model WebAPI.Album
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Album</h4>
+    <hr />
+    @*@foreach (var item in Model)
+        {*@
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Image")
+        </dt>
+
+        <dd>
+            <img src =@ViewBag.AlbumArtUrl width="100px" height="100px" />
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Title")
+        </dt>
+
+        <dd>
+            @String.Format("{0}", Model.Title)
+            @*@String.Format("{0:N2}", item.Price)*@
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Genre")
+        </dt>
+
+        <dd>
+            @ViewBag.GenreName
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Artist Name")
+        </dt>
+
+        <dd>
+            @ViewBag.ArtistName
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Price")
+        </dt>
+
+        <dd>
+            @String.Format("{0:N2}", Model.Price)
+        </dd>
+
+    </dl>
+
+</div>
+<p class="button">
+    @Html.ActionLink("Add to cart", "AddToCart",
+    "ShoppingCart", new { id = Model.AlbumId }, "")
+</p>
+<p>
+    @Html.ActionLink("Back to list", "Browse", new { genre = ViewBag.GenreName}) 
+    @*@Html.ActionLink("Back to List", "Index")*@
+</p>

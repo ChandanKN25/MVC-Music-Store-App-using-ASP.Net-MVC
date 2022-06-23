@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="iLead2021Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TestUserTable">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="designation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TestUserTable1" Relationship="iLead2021Model.FK_TestUserTable_TestUserTable" FromRole="TestUserTable" ToRole="TestUserTable1" />
+    <NavigationProperty Name="TestUserTable2" Relationship="iLead2021Model.FK_TestUserTable_TestUserTable" FromRole="TestUserTable1" ToRole="TestUserTable" />
+  </EntityType>
+  <EntityContainer Name="iLead2021Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TestUserTables" EntityType="Self.TestUserTable" />
+    <AssociationSet Name="FK_TestUserTable_TestUserTable" Association="iLead2021Model.FK_TestUserTable_TestUserTable">
+      <End Role="TestUserTable" EntitySet="TestUserTables" />
+      <End Role="TestUserTable1" EntitySet="TestUserTables" />
+    </AssociationSet>
+    <EntitySet Name="Employees" EntityType="iLead2021Model.Employee" />
+    <EntitySet Name="Albums" EntityType="iLead2021Model.Album" />
+    <EntitySet Name="Artists" EntityType="iLead2021Model.Artist" />
+    <EntitySet Name="Carts" EntityType="iLead2021Model.Cart" />
+    <EntitySet Name="Genres" EntityType="iLead2021Model.Genre" />
+    <EntitySet Name="Orders" EntityType="iLead2021Model.Order" />
+    <EntitySet Name="OrderDetails" EntityType="iLead2021Model.OrderDetail" />
+    <AssociationSet Name="FK__Album__ArtistId__276EDEB3" Association="iLead2021Model.FK__Album__ArtistId__276EDEB3">
+      <End Role="Artist" EntitySet="Artists" />
+      <End Role="Album" EntitySet="Albums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Album_Genre" Association="iLead2021Model.FK_Album_Genre">
+      <End Role="Genre" EntitySet="Genres" />
+      <End Role="Album" EntitySet="Albums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cart_Album" Association="iLead2021Model.FK_Cart_Album">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceLine_Album" Association="iLead2021Model.FK_InvoiceLine_Album">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InvoiceLi__Invoi__2F10007B" Association="iLead2021Model.FK__InvoiceLi__Invoi__2F10007B">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_TestUserTable_TestUserTable">
+    <End Type="iLead2021Model.TestUserTable" Role="TestUserTable" Multiplicity="1" />
+    <End Type="iLead2021Model.TestUserTable" Role="TestUserTable1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TestUserTable">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="TestUserTable1">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmpID" />
+    </Key>
+    <Property Name="EmpID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Empname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmpDesignation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Empsalary" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Album">
+    <Key>
+      <PropertyRef Name="AlbumId" />
+    </Key>
+    <Property Name="AlbumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GenreId" Type="Int32" Nullable="false" />
+    <Property Name="ArtistId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="160" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="AlbumArtUrl" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Artist" Relationship="iLead2021Model.FK__Album__ArtistId__276EDEB3" FromRole="Album" ToRole="Artist" />
+    <NavigationProperty Name="Genre" Relationship="iLead2021Model.FK_Album_Genre" FromRole="Album" ToRole="Genre" />
+    <NavigationProperty Name="Carts" Relationship="iLead2021Model.FK_Cart_Album" FromRole="Album" ToRole="Cart" />
+    <NavigationProperty Name="OrderDetails" Relationship="iLead2021Model.FK_InvoiceLine_Album" FromRole="Album" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="Artist">
+    <Key>
+      <PropertyRef Name="ArtistId" />
+    </Key>
+    <Property Name="ArtistId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Albums" Relationship="iLead2021Model.FK__Album__ArtistId__276EDEB3" FromRole="Artist" ToRole="Album" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="RecordId" />
+    </Key>
+    <Property Name="RecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CartId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AlbumId" Type="Int32" Nullable="false" />
+    <Property Name="Count" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Album" Relationship="iLead2021Model.FK_Cart_Album" FromRole="Cart" ToRole="Album" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="GenreId" />
+    </Key>
+    <Property Name="GenreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Albums" Relationship="iLead2021Model.FK_Album_Genre" FromRole="Genre" ToRole="Album" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Username" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="160" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="160" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="160" FixedLength="false" Unicode="true" />
+    <Property Name="Total" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <NavigationProperty Name="OrderDetails" Relationship="iLead2021Model.FK__InvoiceLi__Invoi__2F10007B" FromRole="Order" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderDetailId" />
+    </Key>
+    <Property Name="OrderDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="AlbumId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <NavigationProperty Name="Album" Relationship="iLead2021Model.FK_InvoiceLine_Album" FromRole="OrderDetail" ToRole="Album" />
+    <NavigationProperty Name="Order" Relationship="iLead2021Model.FK__InvoiceLi__Invoi__2F10007B" FromRole="OrderDetail" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK__Album__ArtistId__276EDEB3">
+    <End Type="iLead2021Model.Artist" Role="Artist" Multiplicity="1" />
+    <End Type="iLead2021Model.Album" Role="Album" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artist">
+        <PropertyRef Name="ArtistId" />
+      </Principal>
+      <Dependent Role="Album">
+        <PropertyRef Name="ArtistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Album_Genre">
+    <End Type="iLead2021Model.Genre" Role="Genre" Multiplicity="1" />
+    <End Type="iLead2021Model.Album" Role="Album" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="GenreId" />
+      </Principal>
+      <Dependent Role="Album">
+        <PropertyRef Name="GenreId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cart_Album">
+    <End Type="iLead2021Model.Album" Role="Album" Multiplicity="1" />
+    <End Type="iLead2021Model.Cart" Role="Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumId" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="AlbumId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceLine_Album">
+    <End Type="iLead2021Model.Album" Role="Album" Multiplicity="1" />
+    <End Type="iLead2021Model.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="AlbumId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InvoiceLi__Invoi__2F10007B">
+    <End Type="iLead2021Model.Order" Role="Order" Multiplicity="1" />
+    <End Type="iLead2021Model.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
